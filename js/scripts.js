@@ -16,26 +16,14 @@ Tasks.prototype.assignId = function() {
   return this.currentId;
 };
 
-
-Tasks.prototype.findTask = function(id) {
+Tasks.prototype.deleteTask = function(task) {
   for (i=0;i<this.list.length;i++){
     if (this.list[i]) {
-        if (this.list[i].id == id) {
-          return this.list[i];
-        }
+      if (this.list[i] == task) {
+        delete this.list[i];
+        return true;
       }
-  };
-  return false
-};
-
-Tasks.prototype.deleteTask = function(id) {
-  for (i=0;i<this.list.length;i++){
-    if (this.list[i]) {
-        if (this.list[i].id == id) {
-          delete this.list[i];
-          return true;
-        }
-      }
+    }
   };
   return false;
 };
@@ -52,6 +40,7 @@ $(document).ready(function() {
     iDid = $("input#iDid").val();
     if (toDo){
       var newSingleTask = new SingleTask(toDo);
+      myTasks.addTask(newSingleTask);
     };
     if (iDid){
       myTasks.deleteTask(iDid);
